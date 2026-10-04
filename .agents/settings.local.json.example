@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make *)",
+      "Bash(go build *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:learn.openapis.org)"
+    ]
+  }
+}

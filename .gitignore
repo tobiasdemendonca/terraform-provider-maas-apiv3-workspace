@@ -1,0 +1,22 @@
+# Nested clones — each is its own git repository. Never add them here.
+/maas/
+/terraform-provider-maas/
+/terraform-provider-maas-APIv3/
+/gomaasclient/
+
+# Local secrets and machine-specific agent settings
+.env
+.env.*
+!.env.example
+.agents/settings.local.json
+
+# Editor / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Accidental Terraform state from local experiments
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform/

@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "workspace",
+      "path": "."
+    },
+    {
+      "name": "terraform-provider-maas-APIv3",
+      "path": "terraform-provider-maas-APIv3"
+    },
+    {
+      "name": "maas (reference)",
+      "path": "maas"
+    },
+    {
+      "name": "terraform-provider-maas (reference)",
+      "path": "terraform-provider-maas"
+    },
+    {
+      "name": "gomaasclient (reference)",
+      "path": "gomaasclient"
+    }
+  ],
+  "settings": {
+    "git.detectSubmodules": false,
+    "git.repositoryScanMaxDepth": 1
+  }
+}
