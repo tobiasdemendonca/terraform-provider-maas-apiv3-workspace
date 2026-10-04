@@ -34,21 +34,31 @@ There is no SHA lockfile. Each nested repo tracks its remote branch, so colleagu
 
 ## Canonical Workshop
 
-The sandboxed toolchain is a [Canonical Workshop](https://ubuntu.com/workshop) (`dev` in `.workshop/dev.yaml`). Prerequisites: [LXD 6.8+](https://ubuntu.com/workshop/docs/tutorial/part-1-get-started/) and `sudo snap install --classic workshop`.
+The sandboxed toolchain is a [Canonical Workshop](https://ubuntu.com/workshop). Prerequisites: [LXD 6.8+](https://ubuntu.com/workshop/docs/tutorial/part-1-get-started/) and `sudo snap install --classic workshop`.
 
-MAAS is **not** part of the workshop. Point `.env` at the existing instance (`MAAS_API_URL` and `MAAS_API_KEY`). Workshop actions source that file via `scripts/with-maas-env.sh`.
+Point `.env` at the existing instance (`MAAS_API_URL` and `MAAS_API_KEY`). Workshop actions source that file via `scripts/with-maas-env.sh`.
+
+Typical getting started (after the clone steps above):
 
 ```bash
-./scripts/bootstrap.sh
-cp .env.example .env   # set MAAS_API_URL and MAAS_API_KEY
+# .env is gitignored; copy the example and fill in MAAS_API_URL and MAAS_API_KEY
+cp .env.example .env
 workshop launch
-workshop exec -- go version
-workshop run -- build
-workshop run -- testacc
-workshop shell
 ```
 
-Go tracks `1.25/stable` (matches the provider `go.mod`). Terraform comes from the Store SDK `terraform-papagr`. `make`, `python3`, and `git` are installed by the in-project `project-tools` SDK. After changing SDKs or the base, run `workshop refresh`. Do not commit `.workshop.lock`.
+Useful commands afterwards:
+
+```bash
+workshop actions          # list project actions defined in .workshop/dev.yaml
+workshop info             # SDKs and versions currently installed in this workshop
+workshop run -- build     # compile the APIv3 provider
+workshop run -- test      # unit tests
+workshop run -- testacc   # acceptance tests against the MAAS in .env
+workshop shell            # interactive shell in the workshop
+workshop refresh          # apply definition changes (new SDKs, base, hooks)
+```
+
+The environment is whatever `.workshop/dev.yaml` lists; `workshop info` shows what launched.
 
 ## Where to commit
 

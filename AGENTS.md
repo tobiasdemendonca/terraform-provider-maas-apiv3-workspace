@@ -13,23 +13,15 @@ Product work happens only in `./terraform-provider-maas-APIv3`. The other trees 
 
 Workspace-level git (this repo) only tracks agent instructions, skills, bootstrap, and clone URLs. Nested directories are independent git repos and are gitignored here.
 
-After clone: `./scripts/bootstrap.sh` (see `README.md`). Nested repos follow the branches in `repos.conf`, not pinned SHAs. Optional sandboxed toolchain: Canonical Workshop — `workshop launch` then `workshop run -- build`. Definitions live in `.workshop/`; never commit `.workshop.lock`.
+After clone: `./scripts/bootstrap.sh` (see `README.md`). Nested repos follow the branches in `repos.conf`, not pinned SHAs. To use the sandboxed toolchain, the user runs `workshop launch` (see `README.md`). Definitions live in `.workshop/`.
 
 ## Connect to MAAS
 
-MAAS is already running **outside** this workspace and outside Workshop. Do not launch MAAS in the sandbox. Put credentials in a gitignored `.env` at this workspace root (copy `.env.example`). Never put secrets in this file.
+Requires an already running MAAS (not started by this workspace or by Workshop). Set `MAAS_API_URL` and `MAAS_API_KEY` in `.env` at this workspace root (copy `.env.example`).
 
-Required:
+Optional, for the current provider acceptance-test login path: `MAAS_USERNAME`, `MAAS_PASSWORD`.
 
-- `MAAS_API_URL` — e.g. `http://10.10.0.28:5240/MAAS/`
-- `MAAS_API_KEY` — consumer:token:secret
-
-Optional (current provider acceptance tests still log in with user/password):
-
-- `MAAS_USERNAME`
-- `MAAS_PASSWORD`
-
-`scripts/with-maas-env.sh` loads `.env` and also exports `TF_MAAS_URL`, `TF_MAAS_USER`, and `TF_MAAS_PWD` for `make testacc`. Workshop actions `test` and `testacc` use that wrapper. The project mount makes `.env` visible at `/project/.env` inside the workshop.
+When the user runs `workshop run -- test` or `workshop run -- testacc`, those actions call `scripts/with-maas-env.sh`, which loads `.env` and exports `TF_MAAS_URL`, `TF_MAAS_USER`, and `TF_MAAS_PWD` for the provider.
 
 Provider implementation rules: `./terraform-provider-maas-APIv3/AGENTS.md`.
 Resource workflow: `.agents/skills/create-resource/SKILL.md`.

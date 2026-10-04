@@ -3,6 +3,7 @@ base: ubuntu@24.04
 sdks:
   - name: go
     channel: 1.25/stable
+  # terraform-cli is only on latest/edge (1.15.x). This SDK publishes latest/stable.
   - name: terraform-papagr
   - name: project-tools
 actions:

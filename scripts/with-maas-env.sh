@@ -6,6 +6,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 if [[ -f "${ROOT}/.env" ]]; then
+  # set -a exports every assignment in .env into the environment of the command we exec.
   set -a
   # shellcheck disable=SC1091
   source "${ROOT}/.env"
