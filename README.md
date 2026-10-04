@@ -38,11 +38,12 @@ The sandboxed toolchain is a [Canonical Workshop](https://ubuntu.com/workshop). 
 
 Point `.env` at the existing instance (`MAAS_API_URL` and `MAAS_API_KEY`). Workshop actions source that file via `scripts/with-maas-env.sh`.
 
-Typical getting started (after the clone steps above):
+Typical getting started (after cloning this workspace):
 
 ```bash
-# .env is gitignored; copy the example and fill in MAAS_API_URL and MAAS_API_KEY
-cp .env.example .env
+./scripts/bootstrap.sh   # clones the provider and reference repos from repos.conf
+cp .env.example .env     # if bootstrap did not already copy it
+# set MAAS_API_URL and MAAS_API_KEY
 workshop launch
 ```
 
