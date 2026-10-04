@@ -1,0 +1,12 @@
+name: dev
+base: ubuntu@24.04
+sdks:
+  - name: go
+    channel: 1.25/stable
+  - name: terraform-papagr
+  - name: project-tools
+actions:
+  bootstrap: ./scripts/bootstrap.sh
+  build: make -C terraform-provider-maas-APIv3 build
+  test: ./scripts/with-maas-env.sh make -C terraform-provider-maas-APIv3 test "$@"
+  testacc: ./scripts/with-maas-env.sh make -C terraform-provider-maas-APIv3 testacc "$@"
