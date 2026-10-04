@@ -11,9 +11,9 @@ Product work happens only in `./terraform-provider-maas-APIv3`. The other trees 
 | `./terraform-provider-maas` | **Reference.** Old APIv2 Terraform provider. Do not commit. |
 | `./gomaasclient` | **Reference.** Hand-maintained Go client used by the old provider. The APIv3 provider generates its client from the OpenAPI spec. Do not commit. |
 
-Workspace-level git (this repo) only tracks agent instructions, skills, bootstrap, and lockfile. Nested directories are independent git repos and are gitignored here.
+Workspace-level git (this repo) only tracks agent instructions, skills, bootstrap, and clone URLs. Nested directories are independent git repos and are gitignored here.
 
-After clone: `./scripts/bootstrap.sh` (see `README.md`). Pin SHAs live in `versions.lock`.
+After clone: `./scripts/bootstrap.sh` (see `README.md`). Nested repos follow the branches in `repos.conf`, not pinned SHAs.
 
 ## Connect to MAAS
 

@@ -1,6 +1,0 @@
-# name	path	url	revision	role
-# role: writable = product work happens here; reference = read-only context (never commit)
-terraform-provider-maas-APIv3	terraform-provider-maas-APIv3	git@github.com:tobiasdemendonca/terraform-provider-maas-APIv3.git	f6358ed3628ce9f84949d8fa98a0a5a4c5db1293	writable
-maas	maas	https://github.com/canonical/maas.git	57a5794f9c005fbc8edcdf876d27cb7a1c673c8d	reference
-terraform-provider-maas	terraform-provider-maas	https://github.com/canonical/terraform-provider-maas.git	2bdf6fcf7b953e2a30bd01e433f4d41bda8b0db7	reference
-gomaasclient	gomaasclient	https://github.com/canonical/gomaasclient.git	328d18754ca1ab42aa6748df1ec735301d850a05	reference
