@@ -26,3 +26,22 @@ Credentials are environment variables, loaded from a gitignored `.env` at this w
 
 Provider implementation rules: `./terraform-provider-maas-APIv3/AGENTS.md`.
 Resource workflow: `.agents/skills/create-resource/SKILL.md`.
+
+## Git (this workspace repo)
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for every commit **and** every pull request title. The PR title is the merge subject; it must be a conventional commit, not a sentence.
+
+Format: `type(optional-scope): short description`
+
+- Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `ci`
+- Scopes when useful: `bootstrap`, `skills`, `agents`
+- Description: lowercase, imperative, no trailing period
+- Branches: `type/short-kebab` (e.g. `chore/follow-default-branches`). Do not use untyped names like `drop-version-pins`.
+
+Examples:
+
+- `chore(bootstrap): clone nested repos on default branches`
+- `docs: require conventional commits for PRs`
+- `feat(skills): add create-resource workflow`
+
+Product work in `./terraform-provider-maas-APIv3` follows that repository's own commit conventions, not this section.

@@ -38,6 +38,10 @@ There is no SHA lockfile. Each nested repo tracks its remote branch, so colleagu
 - Skills, `AGENTS.md`, bootstrap, `repos.conf`: this workspace repo
 - Never: `maas/`, `terraform-provider-maas/`, `gomaasclient/`
 
+## Pull requests and commits
+
+This workspace uses [Conventional Commits](https://www.conventionalcommits.org/) for commit messages, PR titles, and new branch names (`type/short-kebab`). See `AGENTS.md`.
+
 ## Credentials
 
 `.env` is gitignored. Do not put API keys in `AGENTS.md`.
