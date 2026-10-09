@@ -1,0 +1,13 @@
+name: dev
+base: ubuntu@26.04
+sdks:
+  - name: go
+    channel: 1.25/stable
+  # terraform-cli is only on latest/edge (1.15.x). This SDK publishes latest/stable.
+  - name: terraform-papagr
+  - name: project-tools
+actions:
+  bootstrap: ./scripts/bootstrap.sh
+  build: make -C terraform-provider-maas-APIv3 build
+  test: ./scripts/with-maas-env.sh make -C terraform-provider-maas-APIv3 test "$@"
+  testacc: ./scripts/with-maas-env.sh make -C terraform-provider-maas-APIv3 testacc "$@"

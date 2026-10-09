@@ -1,0 +1,5 @@
+#!/bin/bash
+# Install host-adjacent build tools the Go and Terraform SDKs do not ship.
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get install -y --no-install-recommends make python3 git

@@ -13,16 +13,15 @@ Product work happens only in `./terraform-provider-maas-APIv3`. The other trees 
 
 Workspace-level git (this repo) only tracks agent instructions, skills, bootstrap, and clone URLs. Nested directories are independent git repos and are gitignored here.
 
-After clone: `./scripts/bootstrap.sh` (see `README.md`). Nested repos follow the branches in `repos.conf`, not pinned SHAs.
+After clone: `./scripts/bootstrap.sh` (see `README.md`). Nested repos follow the branches in `repos.conf`, not pinned SHAs. To use the sandboxed toolchain, the user runs `workshop launch` (see `README.md`). Definitions live in `.workshop/`.
 
 ## Connect to MAAS
 
-Credentials are environment variables, loaded from a gitignored `.env` at this workspace root (copy `.env.example`). Never put secrets in this file.
+Requires an already running MAAS (not started by this workspace or by Workshop). Set `MAAS_API_URL` and `MAAS_API_KEY` in `.env` at this workspace root (copy `.env.example`).
 
-- `MAAS_API_URL`
-- `MAAS_API_KEY`
-- `MAAS_USERNAME`
-- `MAAS_PASSWORD`
+Optional, for the current provider acceptance-test login path: `MAAS_USERNAME`, `MAAS_PASSWORD`.
+
+When the user runs `workshop run -- test` or `workshop run -- testacc`, those actions call `scripts/with-maas-env.sh`, which loads `.env` and exports `TF_MAAS_URL`, `TF_MAAS_USER`, and `TF_MAAS_PWD` for the provider.
 
 Provider implementation rules: `./terraform-provider-maas-APIv3/AGENTS.md`.
 Resource workflow: `.agents/skills/create-resource/SKILL.md`.
@@ -34,7 +33,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/) for every commi
 Format: `type(optional-scope): short description`
 
 - Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `ci`
-- Scopes when useful: `bootstrap`, `skills`, `agents`
+- Scopes when useful: `bootstrap`, `skills`, `agents`, `workshop`
 - Description: lowercase, imperative, no trailing period
 - Branches: `type/short-kebab` (e.g. `chore/follow-default-branches`). Do not use untyped names like `drop-version-pins`.
 
@@ -42,6 +41,6 @@ Examples:
 
 - `chore(bootstrap): clone nested repos on default branches`
 - `docs: require conventional commits for PRs`
-- `feat(skills): add create-resource workflow`
+- `feat(workshop): add Canonical Workshop definition`
 
 Product work in `./terraform-provider-maas-APIv3` follows that repository's own commit conventions, not this section.

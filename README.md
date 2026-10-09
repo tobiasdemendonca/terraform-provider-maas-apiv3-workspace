@@ -6,7 +6,7 @@ Shared **development workspace** for the MAAS APIv3 Terraform provider. This rep
 
 | Path | Git | Purpose |
 |---|---|---|
-| (this repo) | this repository | `AGENTS.md`, skills, bootstrap, `repos.conf` |
+| (this repo) | this repository | `AGENTS.md`, skills, bootstrap, `repos.conf`, `.workshop/` |
 | `terraform-provider-maas-APIv3/` | [tobiasdemendonca/terraform-provider-maas-APIv3](https://github.com/tobiasdemendonca/terraform-provider-maas-APIv3) | Product. Only place to commit provider code. |
 | `maas/` | [canonical/maas](https://github.com/canonical/maas) | Reference. Do not commit. |
 | `terraform-provider-maas/` | [canonical/terraform-provider-maas](https://github.com/canonical/terraform-provider-maas) | Reference (APIv2 provider). Do not commit. |
@@ -19,7 +19,7 @@ git clone <this-workspace-repo>
 cd show-and-tell-workspace   # or whatever you named the clone
 ./scripts/bootstrap.sh
 cp .env.example .env         # if bootstrap did not already copy it
-# edit .env with a real MAAS API key
+# set MAAS_API_URL and MAAS_API_KEY for the already-running MAAS
 ```
 
 Open this folder (or `maas-apiv3.code-workspace`) in Cursor.
@@ -32,10 +32,39 @@ Open this folder (or `maas-apiv3.code-workspace`) in Cursor.
 
 There is no SHA lockfile. Each nested repo tracks its remote branch, so colleagues get whatever is current when they clone or update.
 
+## Canonical Workshop
+
+The sandboxed toolchain is a [Canonical Workshop](https://ubuntu.com/workshop). Prerequisites: [LXD 6.8+](https://ubuntu.com/workshop/docs/tutorial/part-1-get-started/) and `sudo snap install --classic workshop`.
+
+Point `.env` at the existing instance (`MAAS_API_URL` and `MAAS_API_KEY`). Workshop actions source that file via `scripts/with-maas-env.sh`.
+
+Typical getting started (after cloning this workspace):
+
+```bash
+./scripts/bootstrap.sh   # clones the provider and reference repos from repos.conf
+cp .env.example .env     # if bootstrap did not already copy it
+# set MAAS_API_URL and MAAS_API_KEY
+workshop launch
+```
+
+Useful commands afterwards:
+
+```bash
+workshop actions          # list project actions defined in .workshop/dev.yaml
+workshop info             # SDKs and versions currently installed in this workshop
+workshop run -- build     # compile the APIv3 provider
+workshop run -- test      # unit tests
+workshop run -- testacc   # acceptance tests against the MAAS in .env
+workshop shell            # interactive shell in the workshop
+workshop refresh          # apply definition changes (new SDKs, base, hooks)
+```
+
+The environment is whatever `.workshop/dev.yaml` lists; `workshop info` shows what launched.
+
 ## Where to commit
 
 - Provider features, tests, OpenAPI client: inside `terraform-provider-maas-APIv3/`
-- Skills, `AGENTS.md`, bootstrap, `repos.conf`: this workspace repo
+- Skills, `AGENTS.md`, bootstrap, `repos.conf`, `.workshop/`: this workspace repo
 - Never: `maas/`, `terraform-provider-maas/`, `gomaasclient/`
 
 ## Pull requests and commits

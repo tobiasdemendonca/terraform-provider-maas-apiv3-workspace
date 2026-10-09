@@ -20,3 +20,6 @@
 **/*.tfstate
 **/*.tfstate.*
 **/.terraform/
+
+# Canonical Workshop (lock is host-local; definitions under .workshop/ are tracked)
+.workshop.lock
